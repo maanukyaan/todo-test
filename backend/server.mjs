@@ -51,9 +51,9 @@ app.put('/todo/:id', async (req, res) => {
 			return res.status(404).send({ error: 'Todo not found.' });
 		}
 
-		todos[index] = { ...todos[index], ...req.body }; // Merge existing and new data
+		todos[index] = { ...todos[index], ...req.body };
 
-		await db.push('/', todos); // Save the updated array
+		await db.push('/', todos);
 		res.send(todos[index]);
 	} catch (error) {
 		res.status(500).send({ error: error.message });
@@ -63,8 +63,8 @@ app.put('/todo/:id', async (req, res) => {
 // DELETE: Remove all todos
 app.delete('/todo', async (req, res) => {
 	try {
-		await db.push('/', []); // Clear the todos by pushing an empty array
-		res.send({ message: 'Все задачи успешно удалены.' });
+		await db.push('/', []);
+		res.send({ message: 'All todos deleted succesfully.' });
 	} catch (error) {
 		res.status(500).send({ error: error.message });
 	}
@@ -81,7 +81,7 @@ app.delete('/todo/:id', async (req, res) => {
 			return res.status(404).send({ error: 'Todo not found.' });
 		}
 
-		await db.push('/', newTodos); // Save the updated array
+		await db.push('/', newTodos);
 		res.send({ message: 'Todo deleted successfully.' });
 	} catch (error) {
 		res.status(500).send({ error: error.message });
